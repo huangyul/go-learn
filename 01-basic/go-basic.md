@@ -14,3 +14,21 @@
 - int家族：正常用int即可
 - uint家族：正常用uint即可
 - float家族：优先使用float64
+
+### string
+
+###### 获取字符长度
+
+```go
+package main
+
+import "unicode/utf8"
+
+func main() {
+	print("huang")                          // 5
+	print("你好")                           // 6
+	println(utf8.RuneCountInString("你好")) // 正确获取中文2
+
+}
+
+```
