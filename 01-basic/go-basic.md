@@ -32,3 +32,27 @@ func main() {
 }
 
 ```
+
+## func
+
+#### defer
+
+延迟调用：在函数返回的时候执行
+
+注意点：执行顺序，最后的先执行，栈的特点：`后进先出`
+
+```go
+package main
+
+import "fmt"
+
+// defer
+func main() {
+	defer func() {
+		fmt.Println("第一个defer")
+	}()
+	defer func() {
+		fmt.Println("第二个defer")
+	}()
+}
+```
