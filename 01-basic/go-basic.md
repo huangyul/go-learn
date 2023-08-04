@@ -91,3 +91,17 @@ func main() {
 基本概念：
 - 基本类型和string都是可比较的
 - 如果元素可比较，数组也是可比较的
+
+##  GO接口与类型定义
+
+接口是一组行为的抽象 *当你怀疑要不要定义接口的时候，就加上去*
+
+```go
+package main
+
+type List interface {
+	Add(idx int, val any) error
+	Append(val any)
+	Delete(idx int) (any, error)
+}
+```
