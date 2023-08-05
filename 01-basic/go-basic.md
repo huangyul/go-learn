@@ -120,3 +120,34 @@ type List interface {
 类型别名:`type Type1 = Type2`
 
 既有方法也有方法
+
+## 鸭子类型
+
+结构体实现了接口所定义的方法
+
+## 组合
+
+- 当A组合B之后：
+   - 可以直接在A上调用B的方法
+   - B实现的所有接口，都认为A已经实现了
+- A组合B后，在初始化A的时候将B看作普通字段来初始化
+
+```go
+package main
+
+type TypeA struct{}
+
+func (a *TypeA) SayA() {
+}
+
+type TypeB struct {
+  TypeA
+}
+
+func main() {
+  a := TypeB{
+    TypeA: TypeA{}, // 这样去初始化里面的结构体
+  }
+  a.SayA() // 可以使用A的方法
+}
+```
