@@ -151,3 +151,29 @@ func main() {
   a.SayA() // 可以使用A的方法
 }
 ```
+
+## 泛型
+
+也叫类型参数，约束是any
+
+```go
+package main
+
+type list[T any] interface {
+  Add(a int, b T)
+}
+```
+
+#### 泛型约束
+
+```go
+package main
+
+func Sum[T Number](n T) T {
+	return n + 1
+}
+
+type Number interface {
+	int | int64
+}
+```
