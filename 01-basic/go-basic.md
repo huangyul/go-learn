@@ -177,3 +177,13 @@ type Number interface {
 	int | int64
 }
 ```
+
+## defer 的实现机制
+
+defer内部实现分成三种机制：
+- 堆上分配：指整个defer直接分配到堆上，缺点是要被GC管理，增大GC的压力
+- 栈上分配：整个defer分配到goroutine栈上，不需要配GC管理，性能会提高
+- 开发编码：启用内联优化，直观理解就是把defer放到函数最后最后，这样只需要记录是否要执行defer就好。启用条件：
+   - 函数的defer数量少于或等于8个，因为记录defer是否执行是用byte来记录，只有8位
+   - defer不能在循环中执行，这样就不知道到底有多少个defer了
+   - 函数的return语句与defer语句的乘积小于或者等于15
